@@ -6,6 +6,7 @@
     juration = window.juration;
   
   if (juration && juration.UNITS){
+    juration.UNITS.seconds.patterns = ['millisecond', 'msec', 'ms'];
     juration.UNITS.seconds.patterns = ['second', 'sec', 's'];
     juration.UNITS.minutes.patterns = ['minute', 'min', 'm(?!s)'];
     juration.UNITS.hours.patterns = ['hour', 'hr', 'h'];
@@ -14,6 +15,13 @@
     juration.UNITS.months.patterns = ['month', 'mon', 'mo', 'mth'];
     juration.UNITS.years.patterns = ['year', 'yr', 'y'];
     
+    juration.UNITS.milliseconds.formats = {
+      'chrono': '',
+      'micro':  'ms',
+      'short':  'msec',
+      'long':   'millisecondo',
+      'plural': 'millisecondi'
+    };
     juration.UNITS.seconds.formats = {
       'chrono': '',
       'micro':  's',
