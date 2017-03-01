@@ -30,14 +30,16 @@ $(function(){
       ["3 weeks and, 2 days", 3600 * 24 * 7 * 3 + 3600 * 24 * 2],
       ["3 weeks, plus 2 days", 3600 * 24 * 7 * 3 + 3600 * 24 * 2],
       ["3 weeks with 2 days", 3600 * 24 * 7 * 3 + 3600 * 24 * 2],
-      ["3 mins 4 sec", 3 * 60 + 4],
-      ["3 Mins 4 sec", 3 * 60 + 4],
-      ["3m 4s", 3 * 60 + 4],
-      ["3m, 4s", 3 * 60 + 4],
-      ["3m,4s", 3 * 60 + 4],
-      ["3m4s", 3 * 60 + 4],
+      ["3 mins 4 secs 56 mils", 3 * 60 + 4 + 0.056],
+      ["3 Mins 4 secs 56 Mils", 3 * 60 + 4 + 0.056],
+      ["3m 4s 56 ms", 3 * 60 + 4 + 0.056],
+      ["3m, 4s, 56ms", 3 * 60 + 4 + 0.056],
+      ["3m,4s,56ms", 3 * 60 + 4 + 0.056],
+      ["3m4s56ms", 3 * 60 + 4 + 0.056],
       ["3mon4sec", 3 * 30 * 24 * 3600 + 4],
-      ["15s", 15]
+      ["15s", 15],
+	  ["15ms", 0.015],
+	  ["200 milliseconds", 0.2]
     ];
     
     for(var i = 0, len = testCases.length; i < len; i++) {
@@ -52,8 +54,8 @@ $(function(){
       ["2minths5dhs", "juration.parse(): Unable to parse: minths"],
       ["165hras", "juration.parse(): Unable to parse: hras"],
       ["15 dayz", "juration.parse(): Unable to parse: dayz"],
-      ["", "juration.parse(): Unable to parse: a falsey value"],
-      ["15ms", "juration.parse(): Unable to parse: ms"]
+      ["", "juration.parse(): Unable to parse: a falsey value"]
+	  ["15us", "juration.parse(): Unable to parse: us"]
     ];
     
     for(var i = 0, len = testCases.length; i < len; i++) {
@@ -82,12 +84,14 @@ $(function(){
   test("stringifying seconds to short (default) natural language strings", function() {
     var testCases = [
       [5, "5 secs"],
+	  [5.2, "5 secs 200 mils"],
       [8400, "2 hrs 20 mins"],
       [15638400, "6 mths 1 day"],
       [9000, "2 hrs 30 mins"],
       [14461, '4 hrs 1 min 1 sec'],
       [226800, "2 days 15 hrs"],
       [260703, '3 days 25 mins 3 secs'],
+	  [260703.993, '3 days 25 mins 3 secs 993 mils'],
       [15555600, '6 mths 1 hr'],
       
       // https://github.com/domchristie/juration/issues/4

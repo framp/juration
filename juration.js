@@ -11,10 +11,10 @@
 
   var UNITS = {
 	milliseconds: {
-		patterns: ['millisecond', 'mil', 'ms'],
+		patterns: ['millisecond', 'mil', 'milli', 'ms'],
 		value: 0.001,
 		formats: {
-			'chrono': ':',
+			'chrono': null,
 			'micro':  'ms',
 			'short':  'mil',
 			'long':   'millisecond',
@@ -25,7 +25,7 @@
       patterns: ['second', 'sec', 's'],
       value: 1,
       formats: {
-        'chrono': ':',
+        'chrono': '',
         'micro':  's',
         'short':  'sec',
         'long':   'second',
@@ -111,12 +111,19 @@
     }
     
     var defaults = {
-      format: 'long'
+      format: 'short'
     };
     
     var opts = _extend(defaults, options);
     
-    var units = ['years', 'months', 'days', 'hours', 'minutes', 'seconds', 'milliseconds'], values = [];
+    var units = ['years', 'months', 'days', 'hours', 'minutes', 'seconds'];
+	
+	if (opts.format !== 'chrono') {
+		units.push('milliseconds');
+	}
+	
+	var values = [];
+	
     for(var i = 0, len = units.length; i < len; i++) {
       if(i === 0) {
         values[i] = Math.floor(seconds / UNITS[units[i]].value);
