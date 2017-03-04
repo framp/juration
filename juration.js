@@ -10,6 +10,17 @@
 (function() {
 
   var UNITS = {
+	milliseconds: {
+		patterns: ['millisecond', 'mil', 'milli', 'ms'],
+		value: 0.001,
+		formats: {
+			'chrono': null,
+			'micro':  'ms',
+			'short':  'mil',
+			'long':   'millisecond',
+			'plural': 'milliseconds'
+		}
+	},
     seconds: {
       patterns: ['second', 'sec', 's'],
       value: 1,
@@ -107,6 +118,9 @@
     var opts = _extend(defaults, options);
     
     var units = ['years', 'months', 'days', 'hours', 'minutes', 'seconds'], values = [];
+    if (opts.format !== 'chrono') {
+		  units.push('milliseconds');
+	  }
     var remaining = seconds;
     var activeUnits = 0;
     for(var i = 0, len = units.length;
