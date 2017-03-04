@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "",
   "main": "juration.js",
-  "directories": {
-    "test": "test"
+  "scripts": {
+    "test": "open ./test/index.html"
   },
   "dependencies": {},
   "devDependencies": {},

@@ -78,7 +78,7 @@
     },
     months: {
       patterns: ['month', 'mon', 'mo', 'mth'],
-      value: 2592000,
+      value: 2628000,
       formats: {
         'chrono': ':',
         'micro':  'm',
@@ -111,36 +111,33 @@
     }
     
     var defaults = {
-      format: 'short'
+      format: 'short',
+      units: undefined
     };
     
     var opts = _extend(defaults, options);
     
-    var units = ['years', 'months', 'days', 'hours', 'minutes', 'seconds'];
-	
-	if (opts.format !== 'chrono') {
-		units.push('milliseconds');
-	}
-	
-	var values = [];
-	
-    for(var i = 0, len = units.length; i < len; i++) {
-      if(i === 0) {
-        values[i] = Math.floor(seconds / UNITS[units[i]].value);
-      }
-      else {
-        values[i] = Math.floor((seconds % UNITS[units[i-1]].value) / UNITS[units[i]].value);
-      }
+    var units = ['years', 'months', 'days', 'hours', 'minutes', 'seconds'], values = [];
+    if (opts.format !== 'chrono') {
+		  units.push('milliseconds');
+	  }
+    var remaining = seconds;
+    var activeUnits = 0;
+    for(var i = 0, len = units.length;
+        i < len && (opts.units == undefined || activeUnits < opts.units);
+        i++) {
+      var unit = UNITS[units[i]];
+      values[i] = Math.floor(remaining / unit.value);
+      if (values[i] > 0 || activeUnits > 0)
+        activeUnits++;
+
       if(opts.format === 'micro' || opts.format === 'chrono') {
-        values[i] += UNITS[units[i]].formats[opts.format];
+        values[i] += unit.formats[opts.format];
       }
       else {
-        var singular = UNITS[units[i]].formats[opts.format],
-            plural = opts.format === 'long' ? 
-                      UNITS[units[i]].formats['plural'] :
-                      '';
-        values[i] += ' ' + _pluralize(values[i], singular, plural);
+        values[i] += ' ' + _pluralize(values[i], unit.formats[opts.format]);
       }
+      remaining = remaining % unit.value;
     }
     var output = '';
     for(i = 0, len = values.length; i < len; i++) {
