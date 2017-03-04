@@ -46,7 +46,7 @@ $(function(){
       ["3mon4sec", 3 * MONTH + 4],
       ["15s", 15],
      	["15ms", 0.015],
-	    ["200 milliseconds", 0.2]
+	    ["200 milliseconds", 0.2],
       ["1 year", 1 * YEAR],
       ["12 mos", 1 * YEAR],
       ["1 mos", 1 * MONTH],
@@ -67,7 +67,7 @@ $(function(){
       ["165hras", "juration.parse(): Unable to parse: hras"],
       ["15 dayz", "juration.parse(): Unable to parse: dayz"],
       ["", "juration.parse(): Unable to parse: a falsey value"]
-	  ["15us", "juration.parse(): Unable to parse: us"]
+	    ["15us", "juration.parse(): Unable to parse: us"]
     ];
     
     for(var i = 0, len = testCases.length; i < len; i++) {
@@ -104,7 +104,7 @@ $(function(){
       [4 * HOUR + MINUTE + 1, '4 hrs 1 min 1 sec'],
       [2 * DAY + 15 * HOUR, "2 days 15 hrs"],
       [3 * DAY + 25 * MINUTE + 3, '3 days 25 mins 3 secs'],
-      [260703.993, '3 days 25 mins 3 secs 993 mils'],
+      [3 * DAY + 25 * MINUTE + 3 + 0.993, '3 days 25 mins 3 secs 993 mils'],
       [6 * MONTH + HOUR, '6 mths 1 hr'],
       
       // https://github.com/domchristie/juration/issues/4

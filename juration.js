@@ -127,7 +127,7 @@
         i < len && (opts.units == undefined || activeUnits < opts.units);
         i++) {
       var unit = UNITS[units[i]];
-      values[i] = Math.floor(remaining / unit.value);
+      values[i] = Math.floor(Math.round(remaining * 1000) / 1000 / unit.value);
       if (values[i] > 0 || activeUnits > 0)
         activeUnits++;
 
