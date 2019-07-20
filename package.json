@@ -23,5 +23,7 @@
   "bugs": {
     "url": "https://github.com/framp/juration/issues"
   },
-  "homepage": "https://github.com/framp/juration"
+  "homepage": "https://github.com/framp/juration",
+  "typings": "./juration.d.ts",
+  "types": "./juration.d.ts"
 }
